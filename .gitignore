@@ -1,0 +1,19 @@
+# Ignore large weights and result images
+*.pt
+*.pth
+*.png
+*.jpeg
+*.jpg
+*.pdf
+
+# Windows zone identifiers
+*:Zone.Identifier
+
+# Build and log directories
+build/
+install/
+log/
+results/
+src/aeb/build/
+src/aeb/install/
+src/aeb/log/

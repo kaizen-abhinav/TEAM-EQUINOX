@@ -1,0 +1,41 @@
+# Top-level workspace ignores
+build/
+install/
+log/
+docipg/
+lkareference/
+Referencebaja/
+.antigravitycli/
+.claude/
+.gemini/
+
+# ROS 2 workspace ignores
+abaja_lka_ws/build/
+abaja_lka_ws/install/
+abaja_lka_ws/log/
+abaja_lka_ws/lka_logs/
+
+# Python ignores
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Model weights
+*.pth
+*.pt
+*.onnx
+
+# Data and logs
+*.csv
+*.mp4
+core.*
+*.tmp
+
+# IDEs
+.vscode/
+.idea/

@@ -1,0 +1,27 @@
+<package format="3">
+  <name>inertial_msgs</name>
+  <version>0.0.0</version>
+  <description>Custom messages for aBAJA project</description>
+  <maintainer email="user@example.com">Your Name</maintainer>
+  <license>Apache License 2.0</license>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Dependencies for message generation -->
+  <build_depend>rosidl_default_generators</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+
+  <!-- Execution dependencies for runtime -->
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  
+  <!-- If you are using Python nodes in this package, include rclpy -->
+  <exec_depend>rclpy</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
