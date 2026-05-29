@@ -1,0 +1,33 @@
+# LKA System Parameters
+# These parameters are loaded by all nodes via the launch file.
+#
+# Architecture:
+#   Steering: UFLDv2 lane detection → Stanley controller → DVA (VC.Steer.Ang)
+#   Throttle/Brake: IPG Driver (untouched, except 30 km/h speed limiter in bridge)
+
+lane_detection_node:
+  ros__parameters:
+    model_type: "culane"
+    use_fp16: true
+    camera_topic: "RGBImage"
+
+stanley_controller_node:
+  ros__parameters:
+    k: 0.6
+    k_soft: 1.0
+    steering_smoothing: 0.2
+    image_width: 960
+    image_height: 540
+    ref_y_ratio: 0.75
+    odometry_topic: "VehicleSpeed"
+
+vehicle_control_node:
+  ros__parameters:
+    control_topic: "/vehicle_control"
+
+performance_logger_node:
+  ros__parameters:
+    update_interval: 5
+    output_dir: ""
+    odometry_topic: "VehicleSpeed"
+    imu_topic: "InertialData"
