@@ -24,6 +24,7 @@ class AEBPlotter(Node):
         self.brake = []
         
         self.start_time = None
+        self.scenario_active = False
         
         # Subscriptions
         self.create_subscription(Pose, '/InertialData', self.pose_callback, qos_profile_sensor_data)
@@ -60,13 +61,30 @@ class AEBPlotter(Node):
         self._curr_brake = msg.data
 
     def sample_data(self):
-        # Start logging only when vehicle starts moving or we get non-default distance
-        if self.start_time is None:
+        # Detect scenario start
+        if not self.scenario_active:
             if self._curr_v > 0.1 or self._curr_dist < 290.0:
+                self.scenario_active = True
                 self.start_time = time.time()
+                self.get_logger().info('Scenario STARTED. Logging data...')
+                # Reset buffers
+                self.times.clear()
+                self.x.clear()
+                self.y.clear()
+                self.v.clear()
+                self.dist.clear()
+                self.brake.clear()
             else:
                 return
         
+        # Detect scenario end (target disappeared and we are slow/stopped, or time reset)
+        if self.scenario_active:
+            if self._curr_dist > 290.0 and self._curr_v < 0.1 and len(self.times) > 50:
+                self.get_logger().info('Scenario ENDED. Saving plots...')
+                self.save_plots()
+                self.scenario_active = False
+                return
+
         t = time.time() - self.start_time
         self.times.append(t)
         self.x.append(self._curr_x)
